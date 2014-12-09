@@ -19,8 +19,19 @@ void MainWindow::DrawPath() {
         editForm->setText(qstr);
         this->ui->formLayout->addRow(btnDelete, editForm);
     }
-    auto btnAdd = new QPushButton("Add");
     auto editAdd = new QLineEdit();
+    auto btnAdd = new QPushButton("Add");
+    connect(btnAdd, &QPushButton::clicked, [btnAdd, editAdd, this] () {
+        auto editForm2 = new QLineEdit(editAdd->text());
+        auto btnDelete2 = new QPushButton("Del");
+        connect(btnDelete2, &QPushButton::clicked, [editForm2, btnDelete2] () {
+             if (editForm2) delete editForm2;
+             if (btnDelete2) delete btnDelete2;
+        });
+        this->ui->formLayout->insertRow(this->ui->formLayout->rowCount() - 1
+                                       , btnDelete2, editForm2);
+        editAdd->setText("");
+    });
     this->ui->formLayout->addRow(btnAdd, editAdd);
 }
 
