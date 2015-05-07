@@ -7,24 +7,26 @@
 #include "path.h"
 
 namespace Ui {
-    class MainWindow;
+class MainWindow;
 }
 
 class MainWindow : public QMainWindow {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+  explicit MainWindow(QWidget *parent = 0);
+  ~MainWindow();
 
 private slots:
-    void on_actionReload_triggered();
-    void on_actionDisplay_triggered();
-    void on_actionVersion_triggered();
+  void on_actionReload_triggered();
+  void on_actionDisplay_triggered();
+  void on_actionSave_triggered();
+  void on_actionVersion_triggered();
 
 private:
-    void DrawPath();
+  QString getPath();
+  void drawPath();
 
-    std::unique_ptr<Ui::MainWindow> ui;
-    std::unique_ptr<Path> path;
+  std::unique_ptr<Ui::MainWindow> ui;
+  std::unique_ptr<Path> path;
 };
