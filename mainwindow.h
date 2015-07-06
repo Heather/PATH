@@ -22,6 +22,7 @@ private slots:
   void on_actionDisplay_triggered();
   void on_actionSave_triggered();
   void on_actionVersion_triggered();
+  bool eventFilter(QObject *object, QEvent *event);
 
 private:
   QString getPath();

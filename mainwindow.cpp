@@ -3,6 +3,7 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
+  ui->findEdit->installEventFilter(this);
   path = std::make_unique<Path>();
   this->drawPath();
 }
@@ -92,4 +93,23 @@ void MainWindow::on_actionVersion_triggered() {
   window->setLayout(layout);
   window->setAttribute(Qt::WA_DeleteOnClose);
   window->show();
+}
+
+bool MainWindow::eventFilter(QObject *object, QEvent *event) {
+  if (object ==this->ui->findEdit && event->type() == QEvent::KeyPress) {
+    QKeyEvent *ke = static_cast<QKeyEvent *>(event);
+    if(ke->key()==Qt::Key_Return) {
+      QString textToFind = this->ui->findEdit->toPlainText().toUpper();
+      for (QLineEdit* qle : this->findChildren<QLineEdit *>()) {
+        if (qle->text().toUpper().contains(textToFind)) {
+          this->ui->scrollArea->ensureWidgetVisible(qle);
+          qle->setFocus();
+          return true;
+        }
+      }
+      return true;
+    }
+    return false;
+  }
+  else return false;
 }
