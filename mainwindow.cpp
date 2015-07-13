@@ -107,9 +107,9 @@ void MainWindow::on_actionUpdate_Path_triggered() {
   bool result = path->UpdatePath(myPath);
   QMessageBox msgbox;
   if (result) {
-    msgbox.setText("Success");
+    msgbox.setText("<FONT SIZE=14 COLOR='#F1F1F1'>Success</FONT>");
   } else {
-    msgbox.setText("Failed to update Path, you should run this application as Administrator");
+    msgbox.setText("<FONT COLOR='#F1F1F1'>Failed to update Path, you should run this application as Administrator</FONT>");
   }
   msgbox.exec();
   this->updateTitle();
@@ -124,6 +124,11 @@ void MainWindow::on_actionVersion_triggered() {
   QPalette whitecolor;
   whitecolor.setColor(QPalette::WindowText, Qt::white);
 
+  QFont font = vlabel->font();
+  font.setPointSize(16);
+  font.setBold(true);
+
+  vlabel->setFont(font);
   vlabel->setPalette(whitecolor);
   layout->addWidget(vlabel);
   layout->addWidget(btn_Ok);
@@ -158,10 +163,10 @@ void MainWindow::on_cleanObsolete_clicked() {
   this->updateTitle();
   QMessageBox msgbox;
   if (cln == "") {
-    msgbox.setText("All directoris in Path are up to date");
+    msgbox.setText("<FONT SIZE=14 COLOR='#F1F1F1'>All directoris in Path are up to date</FONT>");
   } else {
-    msgbox.setText( "Cleaned: " + cln
-                  + " Update your Path");
+    msgbox.setText( "<FONT SIZE=12 COLOR='#F1F1F1'>Cleaned: " + cln
+                  + " Update your Path</FONT>");
   }
   msgbox.exec();
 }
