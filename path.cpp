@@ -4,7 +4,7 @@
 
 #include <boost/algorithm/string.hpp>
 
-const std::string Path::version = "PATH v.0.0.3";
+const std::string Path::version = "PATH v.0.0.4";
 
 Path::Path() {
   path = std::getenv("PATH");

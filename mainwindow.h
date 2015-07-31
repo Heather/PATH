@@ -27,6 +27,7 @@ private slots:
 private:
   QString getPath();
   void drawPath();
+  void updateTitle();
 
   std::unique_ptr<Ui::MainWindow> ui;
   std::unique_ptr<Path> path;

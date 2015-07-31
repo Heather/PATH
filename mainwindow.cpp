@@ -2,10 +2,17 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
-  ui->setupUi(this);
-  ui->findEdit->installEventFilter(this);
+  this->ui->setupUi(this);
+  this->ui->findEdit->installEventFilter(this);
   path = std::make_unique<Path>();
   this->drawPath();
+}
+
+void MainWindow::updateTitle() {
+  QString con = getPath();
+  QString title = QString(Path::version.c_str())
+     + " [lenght: " + QString::number(con.count()) + "]";
+  this->setWindowTitle(title);
 }
 
 void MainWindow::drawPath() {
@@ -34,6 +41,7 @@ void MainWindow::drawPath() {
     editAdd->setText("");
   });
   this->ui->formLayout->addRow(btnAdd, editAdd);
+  this->updateTitle();
 }
 
 MainWindow::~MainWindow() { }
@@ -53,6 +61,7 @@ void MainWindow::on_actionReload_triggered() {
       delete widget;
   }
   this->drawPath();
+  this->updateTitle();
 }
 
 void MainWindow::on_actionDisplay_triggered() {
@@ -68,6 +77,7 @@ void MainWindow::on_actionDisplay_triggered() {
   window->setLayout(layout);
   window->setAttribute(Qt::WA_DeleteOnClose, true);
   window->show();
+  this->updateTitle();
 }
 
 void MainWindow::on_actionSave_triggered() {
@@ -79,6 +89,7 @@ void MainWindow::on_actionSave_triggered() {
   QTextStream outStream(&f);
   outStream << con;
   f.close();
+  this->updateTitle();
 }
 
 void MainWindow::on_actionVersion_triggered() {
@@ -96,7 +107,7 @@ void MainWindow::on_actionVersion_triggered() {
 }
 
 bool MainWindow::eventFilter(QObject *object, QEvent *event) {
-  if (object ==this->ui->findEdit && event->type() == QEvent::KeyPress) {
+  if (object == this->ui->findEdit && event->type() == QEvent::KeyPress) {
     QKeyEvent *ke = static_cast<QKeyEvent *>(event);
     if(ke->key()==Qt::Key_Return) {
       QString textToFind = this->ui->findEdit->toPlainText().toUpper();
@@ -109,6 +120,7 @@ bool MainWindow::eventFilter(QObject *object, QEvent *event) {
       }
       return true;
     }
+    this->updateTitle();
     return false;
   }
   else return false;
