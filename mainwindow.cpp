@@ -8,10 +8,13 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
   this->drawPath();
 }
 
+/// While the OS has a limit of 32,767 for the PATH variable,
+/// the Command Prompt has a much much shorter length, somewhere around 2,000. I don't know the exact number.
+///
 void MainWindow::updateTitle() {
   QString con = getPath();
   QString title = QString(Path::version.c_str())
-     + " [lenght: " + QString::number(con.count()) + "]";
+     + " | Lenght " + QString::number(con.count()) + " : 2048";
   this->setWindowTitle(title);
 }
 
