@@ -2,7 +2,10 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
+  QPalette whitecolor;
+  whitecolor.setColor(QPalette::WindowText, Qt::white);
   this->ui->setupUi(this);
+  this->ui->tabWidget->setPalette(whitecolor);
   this->ui->tabWidget->setCurrentIndex(0);
   this->ui->findEdit->installEventFilter(this);
   path = std::make_unique<Path>();
@@ -116,7 +119,13 @@ void MainWindow::on_actionVersion_triggered() {
   auto window = new QDialog(this);
   auto layout = new QVBoxLayout();
   auto btn_Ok = new QPushButton("Ok");
-  layout->addWidget(new QLabel(Path::version.c_str()));
+  auto vlabel = new QLabel(Path::version.c_str());
+
+  QPalette whitecolor;
+  whitecolor.setColor(QPalette::WindowText, Qt::white);
+
+  vlabel->setPalette(whitecolor);
+  layout->addWidget(vlabel);
   layout->addWidget(btn_Ok);
   connect(btn_Ok, &QPushButton::clicked, [window] () {
     if (window) window->close();

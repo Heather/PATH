@@ -5,7 +5,7 @@
 #include <boost/bind.hpp>
 #include <boost/algorithm/string.hpp>
 
-const std::string Path::version = "PATH v.0.0.8";
+const std::string Path::version = "PATH v.0.0.9";
 
 Path::Path() {
   reg = std::make_unique<Registry>();
