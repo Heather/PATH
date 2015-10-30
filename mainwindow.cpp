@@ -129,12 +129,15 @@ void MainWindow::on_actionVersion_triggered() {
 void MainWindow::on_cleanObsolete_clicked() {
   this->ui->tabWidget->setCurrentIndex(0);
   QString con = "";
+  QString cln = "";
   QList<QLineEdit*> paths =
       this->findChildren<QLineEdit *>();
   for (QLineEdit* qle : paths) {
     if (!qle->text().isEmpty())
       if (QDir(qle->text()).exists()) {
         con += qle->text() + ";";
+      } else {
+        cln += qle->text() + ";";
       }
   }
   path->SetPath(con.toUtf8().constData());
@@ -144,6 +147,14 @@ void MainWindow::on_cleanObsolete_clicked() {
   }
   this->drawPath();
   this->updateTitle();
+  QMessageBox msgbox;
+  if (cln == "") {
+    msgbox.setText("All directoris in Path are up to date");
+  } else {
+    msgbox.setText( "Cleaned: " + cln
+                  + " Update your Path");
+  }
+  msgbox.exec();
 }
 
 bool MainWindow::eventFilter(QObject *object, QEvent *event) {
