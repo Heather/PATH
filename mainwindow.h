@@ -23,6 +23,9 @@ private slots:
   void on_actionSave_triggered();
   void on_actionUpdate_Path_triggered();
   void on_actionVersion_triggered();
+
+  void on_cleanObsolete_clicked();
+
   bool eventFilter(QObject *object, QEvent *event);
 
 private:

@@ -3,6 +3,7 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
   this->ui->setupUi(this);
+  this->ui->tabWidget->setCurrentIndex(0);
   this->ui->findEdit->installEventFilter(this);
   path = std::make_unique<Path>();
   this->drawPath();
@@ -123,6 +124,26 @@ void MainWindow::on_actionVersion_triggered() {
   window->setLayout(layout);
   window->setAttribute(Qt::WA_DeleteOnClose);
   window->show();
+}
+
+void MainWindow::on_cleanObsolete_clicked() {
+  this->ui->tabWidget->setCurrentIndex(0);
+  QString con = "";
+  QList<QLineEdit*> paths =
+      this->findChildren<QLineEdit *>();
+  for (QLineEdit* qle : paths) {
+    if (!qle->text().isEmpty())
+      if (QDir(qle->text()).exists()) {
+        con += qle->text() + ";";
+      }
+  }
+  path->SetPath(con.toUtf8().constData());
+  while (QLayoutItem* item = this->ui->formLayout->takeAt(0)) {
+    if (QWidget* widget = item->widget())
+      delete widget;
+  }
+  this->drawPath();
+  this->updateTitle();
 }
 
 bool MainWindow::eventFilter(QObject *object, QEvent *event) {
