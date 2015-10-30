@@ -104,10 +104,30 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_2">
+      <widget class="QWidget" name="Path_utils">
        <attribute name="title">
-        <string>Tab 2</string>
+        <string>Path Utils</string>
        </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_utils">
+        <item>
+         <widget class="QPushButton" name="cleanObsolete">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>50</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>Clean up obsolete paths</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -130,6 +150,8 @@
     <addaction name="actionDisplay"/>
     <addaction name="actionSave"/>
     <addaction name="separator"/>
+    <addaction name="actionUpdate_Path"/>
+    <addaction name="separator"/>
     <addaction name="actionCancel"/>
    </widget>
    <widget class="QMenu" name="menuAbout">
@@ -138,13 +160,7 @@
     </property>
     <addaction name="actionVersion"/>
    </widget>
-   <widget class="QMenu" name="menuSettings">
-    <property name="title">
-     <string>Settings</string>
-    </property>
-   </widget>
    <addaction name="menuMain"/>
-   <addaction name="menuSettings"/>
    <addaction name="menuAbout"/>
   </widget>
   <action name="actionReload">
@@ -159,7 +175,7 @@
   </action>
   <action name="actionCancel">
    <property name="text">
-    <string>Cancel</string>
+    <string>Cancel / Exit</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+C</string>
@@ -173,6 +189,11 @@
   <action name="actionDisplay">
    <property name="text">
     <string>Display</string>
+   </property>
+  </action>
+  <action name="actionUpdate_Path">
+   <property name="text">
+    <string>Update Path</string>
    </property>
   </action>
  </widget>

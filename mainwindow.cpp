@@ -51,8 +51,11 @@ MainWindow::~MainWindow() { }
 
 QString MainWindow::getPath() {
   QString con = "";
-  for (QLineEdit* qle : this->findChildren<QLineEdit *>()) {
-    con += qle->text() + ";";
+  QList<QLineEdit*> paths =
+      this->findChildren<QLineEdit *>();
+  for (QLineEdit* qle : paths) {
+    if (!qle->text().isEmpty())
+      con += qle->text() + ";";
   }
   return con;
 }
@@ -92,6 +95,19 @@ void MainWindow::on_actionSave_triggered() {
   QTextStream outStream(&f);
   outStream << con;
   f.close();
+  this->updateTitle();
+}
+
+void MainWindow::on_actionUpdate_Path_triggered() {
+  std::string myPath = getPath().toUtf8().constData();
+  bool result = path->UpdatePath(myPath);
+  QMessageBox msgbox;
+  if (result) {
+    msgbox.setText("Success");
+  } else {
+    msgbox.setText("Failed to update Path, you should run this application as Administrator");
+  }
+  msgbox.exec();
   this->updateTitle();
 }
 

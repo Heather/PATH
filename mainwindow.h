@@ -21,6 +21,7 @@ private slots:
   void on_actionReload_triggered();
   void on_actionDisplay_triggered();
   void on_actionSave_triggered();
+  void on_actionUpdate_Path_triggered();
   void on_actionVersion_triggered();
   bool eventFilter(QObject *object, QEvent *event);
 

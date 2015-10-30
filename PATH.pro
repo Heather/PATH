@@ -29,10 +29,12 @@ INCLUDEPATH += "F:\P\thridparty\boost"
 
 SOURCES += main.cpp\
     mainwindow.cpp \
-    path.cpp
+    path.cpp \
+    registry.cpp
 
 HEADERS  += mainwindow.h \
     path.h \
-    stdafx.h
+    stdafx.h \
+    registry.h
 
 FORMS += mainwindow.ui
