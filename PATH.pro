@@ -38,3 +38,5 @@ HEADERS  += mainwindow.h \
     registry.h
 
 FORMS += mainwindow.ui
+
+RC_ICONS = app.ico
