@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
   this->ui->tabWidget->setPalette(whitecolor);
   this->ui->tabWidget->setCurrentIndex(0);
   this->ui->findEdit->installEventFilter(this);
-  path = std::make_unique<Path>();
+  path.reset(new Path());
   this->drawPath();
 }
 

@@ -5,10 +5,10 @@
 #include <boost/bind.hpp>
 #include <boost/algorithm/string.hpp>
 
-const std::string Path::version = "PATH v.0.1.0";
+const std::string Path::version = "PATH v.0.1.1";
 
 Path::Path() {
-  reg = std::make_unique<Registry>();
+  reg.reset(new Registry());
   path = reg->getPath();
 }
 
