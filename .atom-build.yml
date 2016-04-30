@@ -1,0 +1,4 @@
+cmd: shake
+args:
+ - f
+name: shake build
