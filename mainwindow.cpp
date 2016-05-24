@@ -132,6 +132,7 @@ void MainWindow::on_actionVersion_triggered() {
   vlabel->setPalette(whitecolor);
   layout->addWidget(vlabel);
   layout->addWidget(btn_Ok);
+  layout->setSizeConstraint( QLayout::SetFixedSize );
   connect(btn_Ok, &QPushButton::clicked, [window] () {
     if (window) window->close();
   });
@@ -171,6 +172,7 @@ void MainWindow::on_cleanObsolete_clicked() {
   msgbox.exec();
 }
 
+///TODO: recode this shit :D
 bool MainWindow::eventFilter(QObject *object, QEvent *event) {
   if (object == this->ui->findEdit && event->type() == QEvent::KeyPress) {
     QKeyEvent *ke = static_cast<QKeyEvent *>(event);
