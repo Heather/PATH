@@ -29,3 +29,5 @@
 
 # Everything goes
 *.user
+/build
+/*.hi

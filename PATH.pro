@@ -19,6 +19,14 @@ win32-msvc* {
     }
 }
 
+contains(QMAKE_HOST.arch, x86):{
+  QMAKE_LFLAGS *= /MACHINE:X86
+}
+
+contains(QMAKE_HOST.arch, x86_64):{
+  QMAKE_LFLAGS *= /MACHINE:X64
+}
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = PATH
